@@ -1,7 +1,6 @@
 #!/bin/bash
 #-------------------------------------------------------------------------------------------------------
-# Script to copy a validated routeros version to Mikrotik CPE and then reboot
-# into the new version
+# Script to copy a validated routeros version to Mikrotik and then reboot into the new version
 #
 # The approved routeros version is stored for each architecture in routeros/upgrade/$ARCHITECTURE/
 # e.g. routeros/upgrade/arm/routeros-7.17.1-arm.npk
@@ -9,7 +8,7 @@
 # Put a list of Mikrotik CPE IP/FQDNs into file called ips.txt
 #-------------------------------------------------------------------------------------------------------
 
-echo ; echo "* Mikrotik CPE upgrade script" ; echo
+echo ; echo "* Mikrotik upgrade script" ; echo
 
 # Vars
 APIUSER=apiuser
@@ -22,7 +21,7 @@ read -s SSHPASS
 echo "Mikrotik API password:"
 read -s APIPASS
 
-# Read in router names/ips from file
+# Read in router IP/FQDNs from file
 for ROUTER in `cat ips.txt`; do
 
     # Flags
@@ -53,7 +52,7 @@ for ROUTER in `cat ips.txt`; do
         ARCHITECTURE=$(curl -k -u $APIUSER:$APIPASS -s http://$ROUTER/rest/system/resource | jq '.["architecture-name"]' | sed 's/\"//g')
 
         # Get our current version number and filename
-        UPGRADE_VERSION=$(ls -1t routeros/upgrade/$ARCHITECTURE/ |  head -n1 | grep -E -o "([0-9]{1,3}[\\.]){2}[0-9]{1,3}")
+        UPGRADE_VERSION=$(ls -1t routeros/upgrade/$ARCHITECTURE/ |  head -n1 | sed -e 's/routeros-\(.*\)-.*/\1/')
         UPGRADE_FILE=$(ls -1t routeros/upgrade/$ARCHITECTURE/ | head -n1)
 
         # Debug
