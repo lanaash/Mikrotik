@@ -48,7 +48,7 @@ for ROUTER in `cat ips.txt`; do
 
     if [ "$IS_ONLINE" = "1" ] && [ "$IS_MIKROTIK" = "1"  ]; then
         # Check current routeros version & hardware architecture
-        CURRENT_VERSION=$(curl -k -u $APIUSER:$APIPASS -s http://$ROUTER/rest/system/resource | jq '.version' | sed 's/\"//g' |  grep -E -o "([0-9]{1,3}[\\.]){2}[0-9]{1,3}")
+        CURRENT_VERSION=$(curl -k -u $APIUSER:$APIPASS -s http://$ROUTER/rest/system/resource | jq '.version' | sed 's/\"//g' | awk '{print $1}')
         ARCHITECTURE=$(curl -k -u $APIUSER:$APIPASS -s http://$ROUTER/rest/system/resource | jq '.["architecture-name"]' | sed 's/\"//g')
 
         # Get our current version number and filename
