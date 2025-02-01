@@ -12,7 +12,7 @@
 echo ; echo "* Mikrotik CPE upgrade script" ; echo
 
 # Vars
-APIUSER=rmcpeapi
+APIUSER=apiuser
 SSHUSER=admin
 DEBUG=True
 
