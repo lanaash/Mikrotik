@@ -66,7 +66,7 @@ for ROUTER in `cat ips.txt`; do
 
         # Check that the current version is routeros 7 and also not running the upgrade version already
         if [ "$UPGRADE_VERSION" != "$CURRENT_VERSION" ] && [[ "$CURRENT_VERSION" =~ ^7 ]]; then
-            echo " $ROUTER can be upgraded with routeros/upgrade/$ARCHITECTURE/$UPGRADE_FILE"
+            echo " Can be upgraded with routeros/upgrade/$ARCHITECTURE/$UPGRADE_FILE"
             read -p " Proceed to upgrade and reboot the router? (y or n) " -n 1 -r
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 echo ; echo " Copying $UPGRADE_FILE"
