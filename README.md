@@ -13,6 +13,6 @@ The base priorities are stored in the comment for the VRRP interface  so you can
 
 Simple bash script to help roll out upgrades to "approved" versions.  
 
-Assumes version 7.x.x and that upgrade version is actritcture specific i.e. arm rather than per-router.
+Assumes version 7.x.x and that upgrade version is architecture specific i.e. arm rather than per-router.
 
 Maybe useful if you want some control.
