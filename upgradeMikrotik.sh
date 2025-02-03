@@ -23,11 +23,13 @@ read -s APIPASS
 # Read in router IP/FQDNs from file
 for ROUTER in `cat ips.txt`; do
 
+    # Error message
+    ERROR_MSG='Errors           ='
+
     # Control vars
     IS_ONLINE=''
     IS_MIKROTIK=''
     NO_UPGRADE_FILE=''
-    ERROR_MSG='Errors           ='
     IS_UPGRADABLE=''
 
     echo; echo "** Connecting to $ROUTER"
@@ -62,7 +64,6 @@ for ROUTER in `cat ips.txt`; do
 
         # Check we have an upgrade file
         if [[ -z "$UPGRADE_FILE" ]]; then
-            # No file
             NO_UPGRADE_FILE=0
             ERROR_MSG="${ERROR_MSG} No upgrade firmware found. "
             IS_UPGRADABLE="No"
@@ -84,7 +85,6 @@ for ROUTER in `cat ips.txt`; do
         echo " RouterOS version = $CURRENT_VERSION"
         echo " Architecture     = $ARCHITECTURE"
         echo " Upgrade version  = $UPGRADE_VERSION"
-
 
         # Proceed with upgrade
         if [ "$IS_UPGRADABLE" != "No" ]; then
