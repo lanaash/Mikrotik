@@ -42,7 +42,7 @@ for ROUTER in `cat /root/routeros/mikrotik.list`; do
             IS_MIKROTIK=1
         else
             IS_MIKROTIK=0
-            ERROR_MSG="${ERROR_MSG} Not a mikrotik ver 7. "
+            ERROR_MSG="${ERROR_MSG} Not a mikrotik or no API. "
             IS_UPGRADABLE="No"
         fi
     else
