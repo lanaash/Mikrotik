@@ -1,11 +1,11 @@
 #!/bin/bash
 #-------------------------------------------------------------------------------------------------------
-# Script to copy a validated routeros version to Mikrotik and then reboot into the new version
+# Script to copy a validated routeros version 7 to Mikrotik and then reboot into the new version
 #
-# The approved routeros version is stored for each architecture in routeros/upgrade/$ARCHITECTURE/
-# e.g. routeros/upgrade/arm/routeros-7.17.1-arm.npk
+# The approved routeros version is stored for each architecture in upgrade/$ARCHITECTURE/
+# e.g. upgrade/arm/routeros-7.17.1-arm.npk
 #
-# Put a list of Mikrotik IP/FQDNs into file called ips.txt
+# Works on a list of Mikrotik IP/FQDNs into file called mikrotik.list
 #-------------------------------------------------------------------------------------------------------
 
 echo ; echo "* Mikrotik upgrade script" ; echo
@@ -20,11 +20,11 @@ read -s SSHPASS
 echo "Mikrotik API password:"
 read -s APIPASS
 
-# Read in router IP/FQDNs from file
-for ROUTER in `cat ips.txt`; do
+# Read in router IP/FQDNs from file e.g. pulled from Oxidized
+for ROUTER in `cat /root/routeros/mikrotik.list`; do
 
     # Error message
-    ERROR_MSG='Errors           ='
+    ERROR_MSG='Errors = '
 
     # Control vars
     IS_ONLINE=''
@@ -37,12 +37,12 @@ for ROUTER in `cat ips.txt`; do
     ping -c3 -i 0.200 -W 0.300 $ROUTER > /dev/null 2>&1
     if [ "$?" = "0" ]; then
         IS_ONLINE=1
-        PLATFORM=$(curl -k -u $APIUSER:$APIPASS -s http://$ROUTER/rest/system/resource | jq '.platform' 2>/dev/null | sed 's/\"//g' | tr '[:upper:]' '[:lower:]')
+        PLATFORM=$(curl -k -u $APIUSER:$APIPASS -s https://$ROUTER/rest/system/resource | jq '.platform' 2>/dev/null | sed 's/\"//g' | tr '[:upper:]' '[:lower:]')
         if [ "$PLATFORM" = "mikrotik" ]; then
             IS_MIKROTIK=1
         else
             IS_MIKROTIK=0
-            ERROR_MSG="${ERROR_MSG} Not a mikrotik. "
+            ERROR_MSG="${ERROR_MSG} Not a mikrotik ver 7. "
             IS_UPGRADABLE="No"
         fi
     else
@@ -54,12 +54,12 @@ for ROUTER in `cat ips.txt`; do
     # If router is online and is mikrotik we can proceed with next checks
     if [ "$IS_UPGRADABLE" != "No" ]; then
         # Check current routeros version & hardware architecture
-        CURRENT_VERSION=$(curl -k -u $APIUSER:$APIPASS -s http://$ROUTER/rest/system/resource | jq '.version' | sed 's/\"//g' | awk '{print $1}')
-        ARCHITECTURE=$(curl -k -u $APIUSER:$APIPASS -s http://$ROUTER/rest/system/resource | jq '.["architecture-name"]' | sed 's/\"//g')
+        CURRENT_VERSION=$(curl -k -u $APIUSER:$APIPASS -s https://$ROUTER/rest/system/resource | jq '.version' | sed 's/\"//g' | awk '{print $1}')
+        ARCHITECTURE=$(curl -k -u $APIUSER:$APIPASS -s https://$ROUTER/rest/system/resource | jq '.["architecture-name"]' | sed 's/\"//g')
 
         # Get our current version number and filename
-        UPGRADE_VERSION=$(ls -1t routeros/upgrade/$ARCHITECTURE/ |  head -n1 | sed 's/routeros-\(.*\)-.*/\1/')
-        UPGRADE_FILE=$(ls -1t routeros/upgrade/$ARCHITECTURE/ | head -n1)
+        UPGRADE_VERSION=$(ls -1t /root/routeros/upgrade/$ARCHITECTURE/ |  head -n1 | sed 's/routeros-\(.*\)-.*/\1/')
+        UPGRADE_FILE=$(ls -1t /root/routeros/upgrade/$ARCHITECTURE/ | head -n1)
 
         # Check we have an upgrade file
         if [[ -z "$UPGRADE_FILE" ]]; then
@@ -79,21 +79,22 @@ for ROUTER in `cat ips.txt`; do
             IS_UPGRADABLE="No"
         fi
 
-        echo " Router model     = $PLATFORM"
+        # Router info from API
+        echo " Router model = $PLATFORM"
         echo " RouterOS version = $CURRENT_VERSION"
-        echo " Architecture     = $ARCHITECTURE"
-        echo " Upgrade version  = $UPGRADE_VERSION"
+        echo " Architecture = $ARCHITECTURE"
+        echo " Upgrade version = $UPGRADE_VERSION"
 
         # Proceed with upgrade
         if [ "$IS_UPGRADABLE" != "No" ]; then
-            echo " Can be upgraded with routeros/upgrade/$ARCHITECTURE/$UPGRADE_FILE"
+            echo " Can be upgraded with upgrade/$ARCHITECTURE/$UPGRADE_FILE"
             read -p " Proceed to upgrade and reboot the router? (y or n) " -n 1 -r
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 echo ; echo " Copying $UPGRADE_FILE"
-                sshpass -p "$SSHPASS" scp routeros/upgrade/$ARCHITECTURE/$UPGRADE_FILE $SSHUSER@$ROUTER:/. > /dev/null 2>&1
+                sshpass -p "$SSHPASS" scp /root/routeros/upgrade/$ARCHITECTURE/$UPGRADE_FILE $SSHUSER@$ROUTER:/. > /dev/null 2>&1
                 if [ "$?" = "0" ]; then
                     echo " File copied, router now rebooting to start upgrade!"
-                    curl -k -u $APIUSER:$APIPASS -s -X POST http://$ROUTER/rest/system/reboot  > /dev/null 2>&1
+                    curl -k -u $APIUSER:$APIPASS -s -X POST https://$ROUTER/rest/system/reboot  > /dev/null 2>&1
                 else
                     echo " File copy failed!"
                 fi
@@ -107,4 +108,3 @@ for ROUTER in `cat ips.txt`; do
         echo " $ERROR_MSG"
     fi
 done
-
