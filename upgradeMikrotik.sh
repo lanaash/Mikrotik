@@ -29,7 +29,6 @@ for ROUTER in `cat ips.txt`; do
     # Control vars
     IS_ONLINE=''
     IS_MIKROTIK=''
-    NO_UPGRADE_FILE=''
     IS_UPGRADABLE=''
 
     echo; echo "** Connecting to $ROUTER"
@@ -64,7 +63,6 @@ for ROUTER in `cat ips.txt`; do
 
         # Check we have an upgrade file
         if [[ -z "$UPGRADE_FILE" ]]; then
-            NO_UPGRADE_FILE=0
             ERROR_MSG="${ERROR_MSG} No upgrade firmware found. "
             IS_UPGRADABLE="No"
         fi
