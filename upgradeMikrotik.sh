@@ -73,8 +73,10 @@ for ROUTER in `cat /root/routeros/mikrotik.list`; do
             IS_UPGRADABLE="No"
         fi
 
-        # Check running version is not an old v6
-        if [[ "$CURRENT_VERSION" =~ ^6 ]]; then
+        # Check running version is v7
+        if [[ "$CURRENT_VERSION" =~ ^7 ]]; then
+            echo " Running routeros v7"
+        else
             ERROR_MSG="${ERROR_MSG} Not version 7. "
             IS_UPGRADABLE="No"
         fi
