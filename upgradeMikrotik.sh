@@ -6,8 +6,6 @@
 # e.g. routeros/upgrade/arm/routeros-7.17.1-arm.npk
 #
 # Put a list of Mikrotik IP/FQDNs into file called ips.txt
-#
-# ASH 2025
 #-------------------------------------------------------------------------------------------------------
 
 echo ; echo "* Mikrotik upgrade script" ; echo
