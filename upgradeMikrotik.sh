@@ -1,4 +1,3 @@
-#!/bin/bash
 #-------------------------------------------------------------------------------------------------------
 # Script to copy a validated routeros version to Mikrotik and then reboot into the new version
 #
@@ -28,6 +27,7 @@ for ROUTER in `cat ips.txt`; do
     IS_MIKROTIK=''
     NO_UPGRADE_FILE=''
     ERROR_MSG='Errors           ='
+    UPGRADABLE=''
 
     echo; echo "** Connecting to $ROUTER"
 
@@ -41,13 +41,16 @@ for ROUTER in `cat ips.txt`; do
         else
             IS_MIKROTIK=0
             ERROR_MSG="${ERROR_MSG} Not a mikrotik. "
+            UPGRADABLE="No"
         fi
     else
         IS_ONLINE=0
         ERROR_MSG="${ERROR_MSG} Not online. "
+        UPGRADABLE="No"
     fi
 
-    if [ "$IS_ONLINE" = "1" ] && [ "$IS_MIKROTIK" = "1"  ]; then
+    # If router is online and is mikrotik we can proceed with next checks
+    if [ "$UPGRADABLE" != "No" ]; then
         # Check current routeros version & hardware architecture
         CURRENT_VERSION=$(curl -k -u $APIUSER:$APIPASS -s http://$ROUTER/rest/system/resource | jq '.version' | sed 's/\"//g' | awk '{print $1}')
         ARCHITECTURE=$(curl -k -u $APIUSER:$APIPASS -s http://$ROUTER/rest/system/resource | jq '.["architecture-name"]' | sed 's/\"//g')
@@ -55,18 +58,25 @@ for ROUTER in `cat ips.txt`; do
         # Get our current version number and filename
         UPGRADE_VERSION=$(ls -1t routeros/upgrade/$ARCHITECTURE/ |  head -n1 | sed 's/routeros-\(.*\)-.*/\1/')
         UPGRADE_FILE=$(ls -1t routeros/upgrade/$ARCHITECTURE/ | head -n1)
+
+        # Check we have an upgrade file
         if [[ -z "$UPGRADE_FILE" ]]; then
             # No file
             NO_UPGRADE_FILE=0
             ERROR_MSG="${ERROR_MSG} No upgrade firmware found. "
+            UPGRADABLE="No"
         fi
 
+        # Check running version same as upgrade version
         if [ "$UPGRADE_VERSION" = "$CURRENT_VERSION" ]; then
-             ERROR_MSG="${ERROR_MSG} Upgrade not required.  "
+            ERROR_MSG="${ERROR_MSG} Upgrade not required.  "
+            UPGRADABLE="No"
         fi
 
+        # Check running version is not an old v6
         if [[ "$CURRENT_VERSION" =~ ^6 ]]; then
-             ERROR_MSG="${ERROR_MSG} Not version 7. "
+            ERROR_MSG="${ERROR_MSG} Not version 7. "
+            UPGRADABLE="No"
         fi
 
         echo " Router model     = $PLATFORM"
@@ -75,8 +85,8 @@ for ROUTER in `cat ips.txt`; do
         echo " Upgrade version  = $UPGRADE_VERSION"
 
 
-        # Check that the current version is routeros 7 and also not running the upgrade version already
-        if [ "$UPGRADE_VERSION" != "$CURRENT_VERSION" ] && [[ "$CURRENT_VERSION" =~ ^7 ]] && [ "$NO_UPGRADE_FILE" != "0" ]; then
+        # Proceed with upgrade
+        if [ "$UPGRADABLE" != "No" ]; then
             echo " Can be upgraded with routeros/upgrade/$ARCHITECTURE/$UPGRADE_FILE"
             read -p " Proceed to upgrade and reboot the router? (y or n) " -n 1 -r
             if [[ $REPLY =~ ^[Yy]$ ]]; then
