@@ -100,7 +100,7 @@ for ROUTER in `cat ips.txt`; do
                     echo " File copy failed!"
                 fi
             else
-                echo " $ERROR_MSG"
+                echo ; echo " Upgrade aborted"
             fi
         else
             echo " $ERROR_MSG"
