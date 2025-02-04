@@ -37,7 +37,7 @@ for ROUTER in `cat /root/routeros/mikrotik.list`; do
     ping -c3 -i 0.200 -W 0.300 $ROUTER > /dev/null 2>&1
     if [ "$?" = "0" ]; then
         IS_ONLINE=1
-        PLATFORM=$(curl -k -u $APIUSER:$APIPASS -s https://$ROUTER/rest/system/resource | jq '.platform' 2>/dev/null | sed 's/\"//g' | tr '[:upper:]' '[:lower:]')
+        PLATFORM=$(curl -k -u $APIUSER:$APIPASS -s https://$ROUTER/rest/system/resource | jq '.platform' 2> /dev/null | sed 's/\"//g' | tr '[:upper:]' '[:lower:]')
         if [ "$PLATFORM" = "mikrotik" ]; then
             IS_MIKROTIK=1
         else
@@ -58,8 +58,8 @@ for ROUTER in `cat /root/routeros/mikrotik.list`; do
         ARCHITECTURE=$(curl -k -u $APIUSER:$APIPASS -s https://$ROUTER/rest/system/resource | jq '.["architecture-name"]' | sed 's/\"//g')
 
         # Get our current version number and filename
-        UPGRADE_VERSION=$(ls -1t /root/routeros/upgrade/$ARCHITECTURE/ |  head -n1 | sed 's/routeros-\(.*\)-.*/\1/')
-        UPGRADE_FILE=$(ls -1t /root/routeros/upgrade/$ARCHITECTURE/ | head -n1)
+        UPGRADE_VERSION=$(ls -1t /root/routeros/upgrade/$ARCHITECTURE/ 2> /dev/null |  head -n1 | sed 's/routeros-\(.*\)-.*/\1/')
+        UPGRADE_FILE=$(ls -1t /root/routeros/upgrade/$ARCHITECTURE/ 2> /dev/null | head -n1)
 
         # Check we have an upgrade file
         if [[ -z "$UPGRADE_FILE" ]]; then
