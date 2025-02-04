@@ -27,8 +27,6 @@ for ROUTER in `cat /root/routeros/mikrotik.list`; do
     ERROR_MSG='Errors = '
 
     # Control vars
-    IS_ONLINE=''
-    IS_MIKROTIK=''
     IS_UPGRADABLE=''
 
     echo; echo "** Connecting to $ROUTER"
@@ -36,17 +34,14 @@ for ROUTER in `cat /root/routeros/mikrotik.list`; do
     # Check router is online and is a mikrotik
     ping -c3 -i 0.200 -W 0.300 $ROUTER > /dev/null 2>&1
     if [ "$?" = "0" ]; then
-        IS_ONLINE=1
         PLATFORM=$(curl -k -u $APIUSER:$APIPASS -s https://$ROUTER/rest/system/resource | jq '.platform' 2> /dev/null | sed 's/\"//g' | tr '[:upper:]' '[:lower:]')
         if [ "$PLATFORM" = "mikrotik" ]; then
-            IS_MIKROTIK=1
+            IS_UPGRADABLE=""
         else
-            IS_MIKROTIK=0
             ERROR_MSG="${ERROR_MSG} Not a mikrotik or no API. "
             IS_UPGRADABLE="No"
         fi
     else
-        IS_ONLINE=0
         ERROR_MSG="${ERROR_MSG} Not online. "
         IS_UPGRADABLE="No"
     fi
