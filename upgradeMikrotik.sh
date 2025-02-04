@@ -93,7 +93,7 @@ for ROUTER in `cat /root/routeros/mikrotik.list`; do
             read -p " Proceed to upgrade and reboot the router? (y or n) " -n 1 -r
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 echo ; echo " Copying $UPGRADE_FILE"
-                sshpass -p "$SSHPASS" scp /root/routeros/upgrade/$ARCHITECTURE/$UPGRADE_FILE $SSHUSER@$ROUTER:/. > /dev/null 2>&1
+                sshpass -p "$SSHPASS" scp -o StrictHostKeyChecking=no /root/routeros/upgrade/$ARCHITECTURE/$UPGRADE_FILE $SSHUSER@$ROUTER:/. > /dev/null 2>&1
                 if [ "$?" = "0" ]; then
                     echo " File copied, router now rebooting to start upgrade!"
                     curl -k -u $APIUSER:$APIPASS -s -X POST https://$ROUTER/rest/system/reboot  > /dev/null 2>&1
