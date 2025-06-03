@@ -1,0 +1,169 @@
+# Hardware, architecture & Firmware
+/system/resource print
+
+# License
+/system/license print
+
+# Logged in users
+/user/active/print
+
+# Reboot
+/system/reboot
+
+# RouterOS Upgrade
+/system/package/update/check-for-updates
+/system/package/update/install
+
+# BIOS Upgrade (packaged with RouterOS)
+/system/routerboard/print
+/system/routerboard/upgrade
+
+# List Routing table
+/ip/route/print
+
+# List Interfaces & MTUs
+/interface/print
+
+# IP config
+/ip/address/print
+
+# List ARP table
+/ip/arp/print
+
+# MAC Table
+/interface/bridge/host/print
+
+# Hostname
+/system/identity/print
+
+# Interface stats
+/interface/ethernet/reset-counters
+/interface/ethernet/print stats
+
+# Ethernet throughput (bandwidth) & packets-per-second (PPS)
+/interface/monitor-traffic sfp-sfpplus1
+
+# Running services and ACLs
+/ip/service/print
+
+# Telnet client
+/system/telnet <IP> <TCP Port>
+
+# Ping
+/ping <IP>
+
+# Firewall state table
+/ip/firewall/connection/print
+
+# Firewall stats
+/ip/firewall/filter/print stats
+
+# NAT rules
+/ip/firewall/nat print
+
+# NAT translations
+/ip/firewall/connection/print detail
+
+# PPPoE throughput (bandwidth) & packets-per-second (PPS)
+/interface/monitor-traffic pppoe-out1
+
+# Check CPU
+/system/resource/monitor
+
+# Connections data
+/tool/torch pppoe-out1
+/tool/torch pppoe-out1 ip-protocol=any port=any
+
+# STP & Bridge
+/interface/bridge monitor
+
+# Interface state
+/interface/ethernet/monitor <number>
+
+# Id interface to customer
+/interface/ethernet/blink <number>
+
+# PPPoE state
+/interface/pppoe-client monitor <number>
+
+# IP connection tracking
+/tool/torch interface=pppoe-out1 src-address=<IP/Bitmask>
+
+# DHCP leases
+/ip/dhcp-server/lease/print
+
+# Show config
+/export
+
+# Import config (copy to /files first)
+/import <filename>.rsc
+
+# Command history
+/system/history/print detail
+
+
+# Logs
+/log/print
+
+# Console settings
+ 
+115200 8N1
+
+
+# Sniffer (Quick)
+
+/tool/sniffer/quick interface=ether1 ip-protocol=icmp
+
+# PCAP
+
+/tool/sniffer/print
+
+/tool/sniffer/set filter-ip-address=192.168.1.73/32
+/tool/sniffer/set filter-direction=any
+/tool/sniffer/set filter-stream=yes
+
+/tool/sniffer/set file-name=my.pcap
+
+/tool/sniffer/set memory-limit=50M
+/tool/sniffer/set file-limit=50M
+
+/tool/sniffer/start interface=ether1 
+/tool/sniffer/stop                  
+
+
+# PPPoE
+
+/interface/pppoe-client/print
+
+# BGP
+
+/routing/bgp/session/print where established
+/ip/route/print where bgp active
+
+Do not stop BGP sessions!!!
+
+# PoE
+
+/interface/ethernet set etyher1 poe-out=off|on
+
+
+# Safe-mode
+Ctrl+X
+
+
+# LTE Running state incl APN
+
+  /interface/lte/print detail
+
+# LTE status and connection detailsq
+
+  /interface/lte/monitor lte1
+
+# LTE Cell network monitor - towers and signals
+ 
+  /interface/lte/cell-monitor duration=10 lte1
+
+
+# LTE modem capabilities
+
+  /interface/lte/show-capabilities lte1
