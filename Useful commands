@@ -46,6 +46,10 @@
 # Running services and ACLs
 /ip/service/print
 
+# Quick view of VOIP bandwidth traversing router
+/tool/torch interface=pppoe-out1 dscp=26  # SIP
+/tool/torch interface=pppoe-out1 dscp=46  # RTP
+
 # Telnet client
 /system/telnet <IP> <TCP Port>
 
