@@ -13,7 +13,7 @@ You could schedule this to loop every 10 seconds for example.
 
 ## simple_speedtest_poc.sh
 
-Useful to find optimal 4G install location before final install
+Useful to find optimal 4G install location before fixing in place
 
 
 ## upgradeMikrotik.sh
