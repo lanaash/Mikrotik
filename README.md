@@ -11,6 +11,11 @@ The base priorities are stored in the comment for the VRRP interface  so you can
 You could schedule this to loop every 10 seconds for example.
 
 
+## simple_speedtest_poc.sh
+
+Useful to find optimal 4G install location before final install
+
+
 ## upgradeMikrotik.sh
 
 Simple bash script to help roll out upgrades to "approved" versions.  
