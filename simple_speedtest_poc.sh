@@ -1,6 +1,6 @@
 #!/bin/bash
 DUT=$1                # Device under test
-DIRECTION=$2          # 'receive', 'trasmit' or 'both'
+DIRECTION=$2          # 'receive', 'transmit' or 'both'
 PROTOCOL=$3           # 'tcp' or 'udp'
 SERVER="192.168.1.1"  # BW Test server
 
