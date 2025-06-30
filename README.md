@@ -6,7 +6,7 @@ Attempt to have Cisco et al like "VRRP tracking" functionality in mikrotik confi
 
 In this case we track default route (e.g. PPPoE or BGP) and adjust VRRP priority if it is not found in the table.
 
-You need to comment the VRRP interfaces with 'Primary' pr 'Backup' and use priorities 100 and 90 respectively.
+You need to comment the VRRP interfaces with 'Primary' or 'Backup' and use priorities 100 and 90 respectively.
 
 You could schedule this to loop every 10 seconds for example.
 
