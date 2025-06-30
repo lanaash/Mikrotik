@@ -18,8 +18,8 @@ Useful to find optimal 4G install location before fixing in place. Uses API call
 
 ## upgradeMikrotik.sh
 
-Simple bash script to help roll out upgrades to "approved" versions.  
+Simple bash script to help roll out upgrades to desired versions.  
 
-Assumes version 7.x.x and that upgrade version is architecture specific i.e. arm rather than per-router.
+Assumes version 7 (REST API) and that upgrade version is architecture specific i.e. arm, arm64 rather than per-router.
 
 Maybe useful if you want some control.
