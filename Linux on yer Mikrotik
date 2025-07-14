@@ -1,0 +1,42 @@
+
+# Refs
+
+https://hub.docker.com/r/devdotnetorg/openssh-server
+
+# Pre-reqs
+
+Add sata disk ie 'sata1'
+
+# Enable container functionality (followed by physical reset)
+
+Install container package!
+
+/system/device-mode/update container=yes
+
+# Configure networking
+
+/interface veth add address=192.168.100.1/24 gateway=192.168.100.254 name=veth1
+
+/interface bridge add name=docker
+
+/interface bridge port add bridge=docker interface=veth1
+
+/ip address add address=192.168.100.254/24 interface=docker network=192.168.100.0
+
+# Configure NATs
+
+/ip firewall nat add action=masquerade chain=srcnat src-address=192.168.100.0/24
+
+/ip firewall nat add action=dst-nat chain=dstnat dst-address=10.0.2.15 dst-port=42 log=yes protocol=tcp to-addresses=192.168.100.1 to-ports=22
+
+# Configure container
+
+/container config set registry-url=https://registry-1.docker.io tmpdir=sata1/tmp
+
+/container envs add key=USER_PASSWORD name=OPENSSHSERVER_ENVS value=123456
+
+/container mounts add dst=/data name=openssh-server-data src=/sata1/ubuntu/data
+
+/container/add name=ubuntu root-dir=sata1/ubuntu interface=veth1 remote-image=devdotnetorg/openssh-server:ubuntu  mounts=openssh-
+server-data
+
