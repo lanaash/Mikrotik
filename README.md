@@ -1,5 +1,13 @@
 # mikrotik
 
+## Linux on yer Mikrotik
+
+Simple Linux guest with SSH installed into container
+
+## Useful commands
+
+Maybe
+
 ## script_track_default_route_adjust_vrrp_priority
 
 Attempt to have Cisco et al like "VRRP route tracking" functionality in mikrotik config. 
