@@ -19,7 +19,7 @@ Make note of WAN interface (e.g. ether16) & host traffic you want to capture (e.
 Configure sniffer
 
     /tool/sniffer set streaming-enabled=yes filter-interface=ether16 \
-    filter-ip-address=192.168.0.Y/32 streaming-server=192.168.0.X
+     streaming-server=192.168.0.X filter-ip-address=192.168.0.Y/32
 
 Start streaming packets
 
