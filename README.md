@@ -4,9 +4,15 @@
 
 Simple Linux guest with SSH installed into container
 
+
 ## Useful commands
 
 Maybe
+
+## Stream live Mikrotik packet capture into Wireshark
+
+Easier than messing around with pcap files
+
 
 ## script_track_default_route_adjust_vrrp_priority
 
