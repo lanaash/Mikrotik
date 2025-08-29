@@ -2,28 +2,29 @@
 
 ## Wireshark
 
-1.1) Make note of your IP (e.g. 192.168.0.X)
+Make note of your IP (e.g. 192.168.0.X)
 
-1.2) Create capture filter
+1) Create capture filter
 
     Name:              Mikrotik sniffer
     Filter expression: udp port 37008
 
-1.3) Start capture on relevant interface  with this filter applied
+2) Start capture on relevant interface  with this filter applied
+
 
 ## Mikrotik
 
-2.1) Make note of WAN interface (e.g. ether16) & host traffic you want to capture (e.g. 192.168.0.Y)
+Make note of WAN interface (e.g. ether16) & host traffic you want to capture (e.g. 192.168.0.Y)
 
-2.1) Configure sniffer
+1) Configure sniffer
 
     /tool/sniffer set filter-interface=ether16 filter-ip-address=192.168.0.Y/32 streaming-enabled=yes streaming-server=192.168.0.X
 
-1.3) Start streaming packets
+2) Start streaming packets
 
     /tool/sniffer start
 
-2.4) Stop session
+3) Stop session
 
     /tool/sniffer stop
 
