@@ -6,8 +6,8 @@
 
 1.2) Create capture filter
 
-Name:              Mikrotik sniffer
-Filter expression: udp port 37008
+    Name:              Mikrotik sniffer
+    Filter expression: udp port 37008
 
 1.3) Start capture on relevant interface  with this filter applied
 
@@ -17,14 +17,14 @@ Filter expression: udp port 37008
 
 2.1) Configure sniffer
 
-/tool/sniffer set filter-interface=ether16 filter-ip-address=192.168.0.Y/32 streaming-enabled=yes streaming-server=192.168.0.X
+    /tool/sniffer set filter-interface=ether16 filter-ip-address=192.168.0.Y/32 streaming-enabled=yes streaming-server=192.168.0.X
 
 1.3) Start streaming packets
 
-/tool/sniffer start
+    /tool/sniffer start
 
 2.4) Stop session
 
-/tool/sniffer stop
+    /tool/sniffer stop
 
 
