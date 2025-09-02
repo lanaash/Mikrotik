@@ -30,10 +30,4 @@ You could schedule this to loop every 10 seconds for example.
 Useful to find optimal 4G install location before fixing in place. Uses API call to start a speedtest to remote server e.g. a Mikrotik CHR.
 
 
-## upgrade_routeros.sh
 
-Simple bash script to help roll out upgrades to desired versions.  
-
-Assumes version 7 (REST API) and that upgrade version is architecture specific i.e. arm, arm64 rather than per-router.
-
-Maybe useful if you have a few routers & want some control.
