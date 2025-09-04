@@ -83,7 +83,7 @@
 ## Check CPU utilisation
 /system/resource/monitor
 
-## Connections data
+## Reali-time traffic monitoring
 /tool/torch pppoe-out1
 /tool/torch pppoe-out1 ip-protocol=any port=any
 
@@ -158,7 +158,7 @@ Ctrl+X
 ## LTE Running state incl APN
 /interface/lte/print detail
 
-## LTE status and connection detailsq
+## LTE status and connection detail
 /interface/lte/monitor lte1
 
 ## LTE Cell network monitor - towers and signals
@@ -166,5 +166,4 @@ Ctrl+X
 
 
 # LTE modem capabilities
-
-  /interface/lte/show-capabilities lte1
+/interface/lte/show-capabilities lte1
