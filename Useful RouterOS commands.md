@@ -50,9 +50,10 @@
 /system/identity/print
 
 ## Interface stats
+```
 /interface/ethernet/reset-counters
 /interface/ethernet/print stats
-
+```
 ## Ethernet throughput (bandwidth) & packets-per-second (PPS)
 /interface/monitor-traffic sfp-sfpplus1
 
@@ -60,9 +61,10 @@
 /ip/service/print
 
 ## Quick view of VOIP bandwidth traversing router
+```
 /tool/torch interface=pppoe-out1 dscp=26  # SIP
 /tool/torch interface=pppoe-out1 dscp=46  # RTP
-
+```
 ## Telnet client
 /system/telnet <IP> <TCP Port>
 
@@ -88,9 +90,10 @@
 /system/resource/monitor
 
 ## Reali-time traffic monitoring
+```
 /tool/torch pppoe-out1
 /tool/torch pppoe-out1 ip-protocol=any port=any
-
+```
 ## STP & Bridge
 /interface/bridge monitor
 
