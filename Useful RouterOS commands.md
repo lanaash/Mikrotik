@@ -16,13 +16,15 @@
 /system/health print
 
 # RouterOS Upgrade
+```
 /system/package/update/check-for-updates
 /system/package/update/install
-
+```
 # BIOS Upgrade (packaged with RouterOS)
+```
 /system/routerboard/print
 /system/routerboard/upgrade
-
+```
 # List Routing table
 /ip/route/print
 
@@ -30,8 +32,10 @@
 /interface/print
 
 ## SNMP
+```
 /system/resource print oid
 /interface/print oid
+```
 
 ## IP config
 /ip/address/print
