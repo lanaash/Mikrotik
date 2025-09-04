@@ -151,9 +151,10 @@
 /interface/pppoe-client/print
 
 ## BGP
+```
 /routing/bgp/session/print where established
 /ip/route/print where bgp active
-
+```
 Do not stop BGP sessions!!!
 
 ## PoE
