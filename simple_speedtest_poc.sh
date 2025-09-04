@@ -13,4 +13,4 @@ MY_JSON=$( /usr/bin/jq -n -c \
               --arg time "10" \
               '{address: $server, protocol: $protocol, direction: $direction, user: $user, password: $pass, duration: $time}' )
 
-/usr/bin/curl -k -u 'LOCAL_USER:LOCAL_PASS' -X POST -H "Content-Type: application/json" -d $MY_JSON  https://$DUT/rest/tool/bandwidth-test | /usr/bin//jq '.[11]' | /usr/bin/egrep  'average|direction'
+/usr/bin/curl --connect-timeout 1 -k -u 'LOCAL_USER:LOCAL_PASS' -X POST -H "Content-Type: application/json" -d $MY_JSON  https://$DUT/rest/tool/bandwidth-test | /usr/bin//jq '.[11]' | /usr/bin/egrep  'average|direction'
