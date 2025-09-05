@@ -83,6 +83,9 @@
 ## NAT translations
 /ip/firewall/connection/print detail
 
+## PPPoE interface
+/interface/pppoe-client/monitor pppoe-out1
+
 ## PPPoE throughput (bandwidth) & packets-per-second (PPS)
 /interface/monitor-traffic pppoe-out1
 
