@@ -23,6 +23,9 @@ In this case we track default route (e.g. PPPoE or BGP) and adjust VRRP priority
 You need to comment the VRRP interfaces with 'Primary' or 'Backup' and use priorities 100 and 90 respectively.
 
 You could schedule this to loop every 10 seconds for example.
+```
+/system/scheduler add interval=30s name=Run_Track_Default_For_VRRP on-event="/system/script/run Track_Default_For_VRRP" policy=read,write start-time=startup
+```
 
 
 ## simple_speedtest_poc.sh
