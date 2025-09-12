@@ -2,7 +2,7 @@
 #
 # Basic PoC for firewall filter management using API
 # to show methods and example data format 
-# Yes you will need to firewall manage state/return traffic :-)
+# Yes you will need to manage state/return traffic :-)
 #
 
 ACTION=$1
