@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 # Basic PoC for firewall filter management using API
+# to show methods and example data format 
+# Yes you will need to firewall manage state/return traffic :-)
 #
 
 ACTION=$1
@@ -12,23 +14,23 @@ print)
   ;;
 
 add)
-  read -p "Destination IP: " DSTIP
+  read -p "Destination Address: " DSTADDRESS
   read -p "Protocol: " PROTOCOL
   read -p "Destination Port: " DSTPORT
-  read -p "Source IP: " SRCIP
+  read -p "Source Address: " SRCADDRESS
   read -p "Action: " ACTION
 
   MY_JSON=$( jq -n -c -s \
           --arg chain "forward" \
-          --arg dstipkey "dst-address" \
-          --arg dstip "$DSTIP" \
+          --arg dstaddresskey "dst-address" \
+          --arg dstaddress "$DSTADDRESS" \
           --arg dstportkey "dst-port" \
           --arg dstport "$DSTPORT" \
           --arg protocol "$PROTOCOL" \
-          --arg srcipkey "src-address" \
-          --arg srcip "$SRCIP" \
+          --arg srcaddresskey "src-address" \
+          --arg srcaddress "$SRCADDRESS" \
           --arg action "$ACTION" \
-          '{chain: $chain, ($dstipkey): $dstip, ($dstportkey): $dstport, protocol: $protocol, ($srcipkey): $srcip, action: $action}' )
+          '{chain: $chain, ($dstaddresskey): $dstaddress, ($dstportkey): $dstport, protocol: $protocol, ($srcaddresskey): $srcaddress, action: $action}' )
 
   curl -k -u admin:admin -X PUT -H "content-type: application/json" -d $MY_JSON http://$ROUTER/rest/ip/firewall/filter | jq
   ;;
