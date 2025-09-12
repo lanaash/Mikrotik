@@ -30,6 +30,5 @@ https://hub.docker.com/r/devdotnetorg/openssh-server
 /container config set registry-url=https://registry-1.docker.io tmpdir=sata1/tmp
 /container envs add key=USER_PASSWORD name=OPENSSHSERVER_ENVS value=123456
 /container mounts add dst=/data name=openssh-server-data src=/sata1/ubuntu/data
-/container/add name=ubuntu root-dir=sata1/ubuntu interface=veth1 remote-image=devdotnetorg/openssh-server:ubuntu  mounts=openssh-
-server-data
+/container/add name=ubuntu root-dir=sata1/ubuntu interface=veth1 remote-image=devdotnetorg/openssh-server:ubuntu  mounts=openssh-server-data
 ```
