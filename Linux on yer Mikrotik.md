@@ -6,6 +6,7 @@ https://hub.docker.com/r/devdotnetorg/openssh-server
 
 ## Pre-reqs
 *Add ext4 formatted sata disk ie 'sata1'
+
 *Install container package!
 
 ## Enable container functionality (followed by physical reset)
