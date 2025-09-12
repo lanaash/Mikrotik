@@ -4,10 +4,11 @@
 #
 
 ACTION=$1
+ROUTER="192.168.88.1"
 
 case $ACTION in
 print)
-  curl -k -u admin:admin -X GET http://192.168.20.254/rest/ip/firewall/filter | jq
+  curl -k -u admin:admin -X GET http://$ROUTER/rest/ip/firewall/filter | jq
   ;;
 
 add)
@@ -29,7 +30,7 @@ add)
           --arg action "$ACTION" \
           '{chain: $chain, ($dstipkey): $dstip, ($dstportkey): $dstport, protocol: $protocol, ($srcipkey): $srcip, action: $action}' )
 
-  curl -k -u admin:admin -X PUT -H "content-type: application/json" -d $MY_JSON http://192.168.20.254/rest/ip/firewall/filter | jq
+  curl -k -u admin:admin -X PUT -H "content-type: application/json" -d $MY_JSON http://$ROUTER/rest/ip/firewall/filter | jq
   ;;
 
 modify)
@@ -42,7 +43,7 @@ modify)
           --arg value "$VALUE" \
           '{($key): $value}' )
 
-  curl -k -u admin:admin -X PATCH -H "content-type: application/json" -d $MY_JSON http://192.168.20.254/rest/ip/firewall/filter/*$RULENUM
+  curl -k -u admin:admin -X PATCH -H "content-type: application/json" -d $MY_JSON http://$ROUTER/rest/ip/firewall/filter/*$RULENUM
   ;;
 
 move)
@@ -57,22 +58,22 @@ move)
           --arg dst "$DSTRULENUM" \
           '{numbers: $src, destination: $dst}' )
 
-  curl -k -u admin:admin -X POST -H "content-type: application/json" -d $MY_JSON http://192.168.20.254/rest/ip/firewall/filter/move | jq
+  curl -k -u admin:admin -X POST -H "content-type: application/json" -d $MY_JSON http://$ROUTER/rest/ip/firewall/filter/move | jq
   ;;
 
 disable)
   read -p "Disable what rule number? " RULENUM
-  curl -k -u admin:admin -X PATCH -H "content-type: application/json" -d '{"disabled":"true"}' http://192.168.20.254/rest/ip/firewall/filter/*$RULENUM
+  curl -k -u admin:admin -X PATCH -H "content-type: application/json" -d '{"disabled":"true"}' http://$ROUTER/rest/ip/firewall/filter/*$RULENUM
   ;;
 
 enable)
   read -p "Enable what rule number? " RULENUM
-  curl -k -u admin:admin -X PATCH -H "content-type: application/json" -d '{"disabled":"false"}' http://192.168.20.254/rest/ip/firewall/filter/*$RULENUM
+  curl -k -u admin:admin -X PATCH -H "content-type: application/json" -d '{"disabled":"false"}' http://$ROUTER/rest/ip/firewall/filter/*$RULENUM
   ;;
 
 delete)
   read -p "Delete what rule number? " RULENUM
-  curl -k -u admin:admin -X DELETE http://192.168.20.254/rest/ip/firewall/filter/*$RULENUM | jq
+  curl -k -u admin:admin -X DELETE http://$ROUTER/rest/ip/firewall/filter/*$RULENUM | jq
  ;;
 
 *)
