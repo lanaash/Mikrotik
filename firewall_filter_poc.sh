@@ -77,7 +77,7 @@ delete)
  ;;
 
 *)
-  echo "Options are print, add, modify, move, disable, enable or delete"
+  echo "Actions are print, add, modify, move, disable, enable or delete"
   ;;
 esac
 
