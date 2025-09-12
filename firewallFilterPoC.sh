@@ -1,0 +1,82 @@
+#!/bin/bash
+#
+# Basic PoC for firewall filter management using API
+#
+
+ACTION=$1
+
+case $ACTION in
+print)
+  curl -k -u admin:admin -X GET http://192.168.20.254/rest/ip/firewall/filter | jq
+  ;;
+
+add)
+  read -p "Destination IP: " DSTIP
+  read -p "Protocol: " PROTOCOL
+  read -p "Destination Port: " DSTPORT
+  read -p "Source IP: " SRCIP
+  read -p "Action: " ACTION
+
+  MY_JSON=$( jq -n -c -s \
+          --arg chain "forward" \
+          --arg dstipkey "dst-address" \
+          --arg dstip "$DSTIP" \
+          --arg dstportkey "dst-port" \
+          --arg dstport "$DSTPORT" \
+          --arg protocol "$PROTOCOL" \
+          --arg srcipkey "src-address" \
+          --arg srcip "$SRCIP" \
+          --arg action "$ACTION" \
+          '{chain: $chain, ($dstipkey): $dstip, ($dstportkey): $dstport, protocol: $protocol, ($srcipkey): $srcip, action: $action}' )
+
+  curl -k -u admin:admin -X PUT -H "content-type: application/json" -d $MY_JSON http://192.168.20.254/rest/ip/firewall/filter | jq
+  ;;
+
+modify)
+  read -p "Modify what rule number? " RULENUM
+  read -p "Modify what key(dst-address,dst-port,protocol,src-address,action)? " KEY
+  read -p "New value? " VALUE
+
+  MY_JSON=$( jq -n -c -s \
+          --arg key "$KEY" \
+          --arg value "$VALUE" \
+          '{($key): $value}' )
+
+  curl -k -u admin:admin -X PATCH -H "content-type: application/json" -d $MY_JSON http://192.168.20.254/rest/ip/firewall/filter/*$RULENUM
+  ;;
+
+move)
+  read -p "Move what rule number? " SRCRULENUM
+  read -p "To where? " DSTRULENUM
+
+  SRCRULENUM="*${SRCRULENUM}"
+  DSTRULENUM="*${DSTRULENUM}"
+
+  MY_JSON=$( jq -n -c \
+          --arg src "$SRCRULENUM" \
+          --arg dst "$DSTRULENUM" \
+          '{numbers: $src, destination: $dst}' )
+
+  curl -k -u admin:admin -X POST -H "content-type: application/json" -d $MY_JSON http://192.168.20.254/rest/ip/firewall/filter/move | jq
+  ;;
+
+disable)
+  read -p "Disable what rule number? " RULENUM
+  curl -k -u admin:admin -X PATCH -H "content-type: application/json" -d '{"disabled":"true"}' http://192.168.20.254/rest/ip/firewall/filter/*$RULENUM
+  ;;
+
+enable)
+  read -p "Enable what rule number? " RULENUM
+  curl -k -u admin:admin -X PATCH -H "content-type: application/json" -d '{"disabled":"false"}' http://192.168.20.254/rest/ip/firewall/filter/*$RULENUM
+  ;;
+
+delete)
+  read -p "Delete what rule number? " RULENUM
+  curl -k -u admin:admin -X DELETE http://192.168.20.254/rest/ip/firewall/filter/*$RULENUM | jq
+ ;;
+
+*)
+  echo "Options are print, add, modify, move, disable, enable or delete"
+  ;;
+esac
+
