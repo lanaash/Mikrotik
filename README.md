@@ -18,11 +18,11 @@ Easier than messing around with pcap files
 
 Attempt to have Cisco et al like "VRRP route tracking" functionality in mikrotik config. 
 
-In this case we track default route (e.g. PPPoE or BGP) and adjust VRRP priority if it is not found in the table.
+In this case we track default route (e.g. PPPoE or BGP) and adjust down VRRP priority if it is not found in the table.
 
 You need to comment the VRRP interfaces with 'Primary' or 'Backup' and use priorities 100 and 90 respectively.
 
-You could schedule this to loop every 10 seconds for example.
+You could schedule this to loop every 30 seconds for example.
 ```
 /system/scheduler add interval=30s name=Run_Track_Default_For_VRRP on-event="/system/script/run Track_Default_For_VRRP" policy=read,write start-time=startup
 ```
