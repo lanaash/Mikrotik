@@ -2,7 +2,7 @@
 
 ## Wireshark
 
-Make note of your IP (e.g. 192.168.0.X)
+Make note of your laptop IP (e.g. 192.168.0.X)
 
 Create capture filter
 
