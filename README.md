@@ -4,9 +4,9 @@
 ## Useful RouterOS commands
 
 
-## Linux on yer Mikrotik
+## Linux guest on Mikrotik
 
-Simple Linux guest with SSH installed into container
+Simple Linux guest with SSH installed into Mikrotik container
 
 ## Stream live Mikrotik packet capture into Wireshark
 
