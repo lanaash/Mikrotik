@@ -30,7 +30,9 @@ add)
           --arg srcaddresskey "src-address" \
           --arg srcaddress "$SRCADDRESS" \
           --arg action "$ACTION" \
-          '{chain: $chain, ($dstaddresskey): $dstaddress, ($dstportkey): $dstport, protocol: $protocol, ($srcaddresskey): $srcaddress, action: $action}' )
+          --arg placebeforekey "place-before" \
+          --arg placebefore "0" \
+          '{chain: $chain, ($placebeforekey): $placebefore, ($dstaddresskey): $dstaddress, ($dstportkey): $dstport, protocol: $protocol, ($srcaddresskey): $srcaddress, action: $action}' )
 
   curl -k -u admin:admin -X PUT -H "content-type: application/json" -d $MY_JSON http://$ROUTER/rest/ip/firewall/filter | jq
   ;;
