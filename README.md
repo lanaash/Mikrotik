@@ -28,9 +28,14 @@ You could schedule this to loop every 10 seconds for example.
 ```
 
 
-## simple_speedtest_poc.sh
+## PoCs
+
+### speedtest_api_poc.sh
 
 Useful to find optimal 4G install location before fixing in place. Uses API call to start a speedtest to remote server e.g. a Mikrotik CHR.
 
+### firewall_filter_api_poc.sh
+
+Simple PoC to explore surfacing firewall policy
 
 
