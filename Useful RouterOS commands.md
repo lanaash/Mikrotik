@@ -176,5 +176,5 @@ Ctrl+X
 /interface/lte/cell-monitor duration=10 lte1
 
 
-# LTE modem capabilities
+## LTE modem capabilities
 /interface/lte/show-capabilities lte1
