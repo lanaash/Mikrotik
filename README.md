@@ -14,7 +14,7 @@ Easier than messing around with pcap files
 
 ## Script to track default route & adjust VRRP priority
 
-Attempt to have Cisco et al like "VRRP route tracking" functionality in mikrotik config.
+Attempt to have Cisco/Juniper/Ekinops/Huawei (etc etc) like "VRRP route tracking" functionality in Mikrotik config.
 
 In this case we track default route (e.g. source PPPoE or BGP) and adjust down the VRRP priority if it is not found in the table.
 
