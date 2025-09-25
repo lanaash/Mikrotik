@@ -44,7 +44,7 @@
 /ip/arp/print
 
 ## Find in ARP table
-:put [/ip/arp/find address ="X.X.X.X"]
+/ip/arp/print where address=x.x.x.x
 
 ## MAC Table
 /interface/bridge/host/print
