@@ -43,6 +43,9 @@
 ## List ARP table
 /ip/arp/print
 
+## Find in ARP table
+:put [/ip/arp/find address ="X.X.X.X"]
+
 ## MAC Table
 /interface/bridge/host/print
 
