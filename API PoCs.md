@@ -20,7 +20,24 @@ MY_JSON=$( /usr/bin/jq -n -c \
 /usr/bin/curl --connect-timeout 1 -k -u 'LOCAL_USER:LOCAL_PASS' -X POST -H "Content-Type: application/json" -d $MY_JSON  https://$DUT/rest/tool/bandwidth-test | /usr/bin//jq '.[11]' | /usr/bin/egrep  'average|direction'
 ```
 
-## Firewall filter
+## Python subroutine for config patching
+```
+import json
+import requests
+import urllib3
+urllib3.disable_warnings()
+
+
+def updateConfig(router, user, passwd, url, key, value):
+    method  = "PATCH"
+    headers = {"content-type": "application/json"}
+    data    = {key: value}
+    response = requests.request(method=method, url=url, headers=headers, auth=(user, passwd), verify=False, json=data)
+
+```
+
+
+## Firewall filter operations
 ```
 #!/bin/bash
 #
