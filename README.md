@@ -25,6 +25,6 @@ You could schedule this to loop every 30 seconds for example.
 
 ## API PoCs
 
-Simple PoCs for RouterOS functionality via Rest API
+Simple PoCs for exploring RouterOS functionality via the Rest API
 
 
