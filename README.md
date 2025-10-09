@@ -12,7 +12,7 @@ Simple Linux guest with SSH installed into Mikrotik container
 
 Easier than working with pcap files
 
-## Script to track default route & adjust VRRP priority
+## RouterOS script to track default route & adjust VRRP priority
 
 Attempt to have Cisco/Juniper/Ekinops/Huawei (etc etc) like "VRRP route tracking" functionality in Mikrotik config.
 
@@ -23,7 +23,7 @@ You need to comment the VRRP interfaces with 'Primary' or 'Backup' and use prior
 You could schedule this to loop every 30 seconds for example.
 
 
-## API PoCs
+## API PoCs in python & bash
 
 Simple PoCs for exploring RouterOS functionality via the Rest API
 
