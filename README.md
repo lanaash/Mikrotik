@@ -25,6 +25,6 @@ You could schedule this to loop every 30 seconds for example.
 
 ## API PoCs in python & bash
 
-Simple PoCs for exploring RouterOS functionality via the Rest API
+Simple PoCs for exploring RouterOS config via the Rest API
 
 
