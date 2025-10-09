@@ -10,7 +10,7 @@ Simple Linux guest with SSH installed into Mikrotik container
 
 ## Stream live Mikrotik packet capture into Wireshark
 
-Easier than messing around with pcap files
+Easier than working with pcap files
 
 ## Script to track default route & adjust VRRP priority
 
