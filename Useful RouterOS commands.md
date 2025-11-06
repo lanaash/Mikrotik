@@ -15,6 +15,11 @@
 # System health (CPU temp, SFP temp, fans, PSUs)
 /system/health print
 
+# View default build script
+```
+/system default-configuration print
+```
+
 # RouterOS Upgrade
 ```
 /system/package/update/check-for-updates
