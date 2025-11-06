@@ -1,3 +1,13 @@
+# Pre-reqs
+APN Profiles are already configured. The script can just flip between them based on the installed SIM
+
+# Schedule
+```
+/system scheduler add interval=60s name=Run_Configure_APN on-event="/system/script/run Configure_APN" policy=read,write start-time=startup
+```
+
+# Script
+```
 :global mobileState
 :global currentMobileApn
 :global newMobileApn "default"
@@ -12,9 +22,9 @@
 :if ($mobileState = "yes") do={
   :put "Mobile connected nothing to do..."
 } else={
-  :if ($mobileImsi ~"^23410" || $mobileIccid ~"^894411") do={ :set newMobileApn "O2 DIA" }
-  :if ($mobileImsi ~"^23415" || $mobileIccid ~"^894410") do={ :set newMobileApn "Vodafone DIA" }
-  :if ($mobileImsi ~"^23433" || $mobileIccid ~"^894430" || $mobileIccid ~"^894412") do={ :set newMobileApn "EE DIA" }
+  :if ($mobileImsi ~"^23410" || $mobileIccid ~"^894411") do={ :set newMobileApn "O2" }
+  :if ($mobileImsi ~"^23415" || $mobileIccid ~"^894410") do={ :set newMobileApn "Vodafone" }
+  :if ($mobileImsi ~"^23433" || $mobileIccid ~"^894430" || $mobileIccid ~"^894412") do={ :set newMobileApn "EE" }
   :if ($currentMobileApn = $newMobileApn) do={
     :put "APN correctly set so nothing to do..."
   } else={
@@ -23,3 +33,4 @@
 	/interface/lte set [ find default-name=lte1 ] apn-profiles="$newMobileApn"
   }
 }
+```
