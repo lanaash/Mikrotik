@@ -22,6 +22,11 @@ You need to comment the VRRP interfaces with 'Primary' or 'Backup' and use prior
 
 You could schedule this to loop every 30 seconds for example.
 
+## RouterOS script to manage APN profile depending on SIM
+
+Check SIM and change APN profile depending on the SIM.
+
+You could schedule this to loop every 30 seconds for example.
 
 ## API PoCs in python & bash
 
