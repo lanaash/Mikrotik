@@ -24,9 +24,9 @@ The APN Profiles are already configured. The script can just flip between them b
 }
 # From SIM details get APN Profile we should be using
 :put "IMSI=$mobileImsi ICCID=$mobileIccid"
-:if ($mobileImsi ~"^23410" || $mobileIccid ~"^894411") do={ :set newMobileApn "O2 DIA" }
-:if ($mobileImsi ~"^23415" || $mobileIccid ~"^894410") do={ :set newMobileApn "Vodafone DIA" }
-:if ($mobileImsi ~"^23433" || $mobileIccid ~"^894430" || $mobileIccid ~"^894412") do={ :set newMobileApn "EE DIA" }
+:if ($mobileImsi ~"^23410" || $mobileIccid ~"^894411") do={ :set newMobileApn "O2" }
+:if ($mobileImsi ~"^23415" || $mobileIccid ~"^894410") do={ :set newMobileApn "Vodafone" }
+:if ($mobileImsi ~"^23433" || $mobileIccid ~"^894430" || $mobileIccid ~"^894412") do={ :set newMobileApn "EE" }
 # Check current configured APN matches the required APN
 :if ($currentMobileApn = $newMobileApn) do={
   :put "APN correctly set to $currentMobileApn so nothing to do..."
