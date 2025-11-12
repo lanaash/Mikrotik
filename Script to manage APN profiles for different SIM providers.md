@@ -1,5 +1,5 @@
 # Pre-reqs
-APN Profiles are already configured. The script can just flip between them based on the installed SIM
+The APN Profiles are already configured. The script can just flip between them based on the installed SIM
 
 # Schedule
 ```
@@ -8,29 +8,32 @@ APN Profiles are already configured. The script can just flip between them based
 
 # Script
 ```
-:global mobileState
-:global currentMobileApn
-:global newMobileApn "default"
-:set $mobileState value=[/interface/lte/get lte1 running as-string]
+# Vars
+:local mobileState
+:local currentMobileApn
+:local mobileImsi
+:local mobileIccid
+# If we can't identify SIM we leave set to the default APN profile
+:local newMobileApn "default"
+# Get current configured APN Profile
 :set $currentMobileApn value=[/interface/lte/get lte1 apn-profiles  as-string]
-:put "Running=$mobileState APN=$currentMobileApn"
+# Get SIM details
 /interface/lte/monitor lte1 once do={
-  :global mobileImsi $"imsi"
-  :global mobileIccid $"uicc"
+  :set mobileImsi $"imsi"
+  :set mobileIccid $"uicc"
 }
+# From SIM details get APN Profile we should be using
 :put "IMSI=$mobileImsi ICCID=$mobileIccid"
-:if ($mobileState = "yes") do={
-  :put "Mobile connected nothing to do..."
+:if ($mobileImsi ~"^23410" || $mobileIccid ~"^894411") do={ :set newMobileApn "O2 DIA" }
+:if ($mobileImsi ~"^23415" || $mobileIccid ~"^894410") do={ :set newMobileApn "Vodafone DIA" }
+:if ($mobileImsi ~"^23433" || $mobileIccid ~"^894430" || $mobileIccid ~"^894412") do={ :set newMobileApn "EE DIA" }
+# Check current configured APN matches the required APN
+:if ($currentMobileApn = $newMobileApn) do={
+  :put "APN correctly set to $currentMobileApn so nothing to do..."
+  #:log info "APN correctly set to $currentMobileApn so nothing to do..."
 } else={
-  :if ($mobileImsi ~"^23410" || $mobileIccid ~"^894411") do={ :set newMobileApn "O2" }
-  :if ($mobileImsi ~"^23415" || $mobileIccid ~"^894410") do={ :set newMobileApn "Vodafone" }
-  :if ($mobileImsi ~"^23433" || $mobileIccid ~"^894430" || $mobileIccid ~"^894412") do={ :set newMobileApn "EE" }
-  :if ($currentMobileApn = $newMobileApn) do={
-    :put "APN correctly set so nothing to do..."
-  } else={
     :put "Changing APN from $currentMobileApn to $newMobileApn"
 	:log info "Changing APN from $currentMobileApn to $newMobileApn"
 	/interface/lte set [ find default-name=lte1 ] apn-profiles="$newMobileApn"
-  }
 }
 ```
