@@ -129,8 +129,8 @@
 ## Factory defaults
 /system/reset-configuration
 
-## Import config (copy to /files first)
-/import file-name=<filename>.rsc verbose=yes [dry-run]
+## Import config (copy FILENAME to /files first)
+/import file-name=FILENAME verbose=yes [dry-run]
 
 ## Upgrade (copy routeros and any packages to /files first)
 /reboot
