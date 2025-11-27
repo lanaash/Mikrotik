@@ -126,8 +126,17 @@
 ## Show config
 /export
 
+## Factory defaults
+/system/reset-configuration
+
 ## Import config (copy to /files first)
-/import <filename>.rsc
+/import file-name=<filename>.rsc verbose=yes [dry-run]
+
+## Upgrade (copy routeros and any packages to /files first)
+/reboot
+
+## Downgrade (copy routeros and any packages to /files first)
+/system/package/downgrade
 
 ## Command history
 /system/history/print detail
