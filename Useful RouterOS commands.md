@@ -6,6 +6,9 @@
 # License
 /system/license print
 
+# Device mode & features
+/system/device-mode/print
+
 # Logged in users
 /user/active/print
 
