@@ -15,7 +15,7 @@ Easier than working with pcap files
 
 ## DHCP server for remote relay
 
-Simple example for providing DHCP services to remote relay such as a layer 3 switch or other router aggregating IP networks
+Simple example for providing DHCP services to remote relay such as a layer 3 switch or other aggregation router
 
 
 ## RouterOS script to track default route & adjust VRRP priority
