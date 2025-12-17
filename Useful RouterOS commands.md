@@ -26,7 +26,9 @@
 ```
 
 # System health (CPU temp, SFP temp, fans, PSUs)
+```
 /system/health print
+```
 
 # View default build script
 ```
