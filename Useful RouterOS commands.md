@@ -124,77 +124,119 @@
 /ping <IP>
 ```
 
-
 ## Firewall state table
+```
 /ip/firewall/connection/print
+```
 
 ## Firewall stats
+```
 /ip/firewall/filter/print stats
+```
 
 ## NAT rules
+```
 /ip/firewall/nat print
+```
 
 ## NAT translations
+```
 /ip/firewall/connection/print detail
+```
 
 ## PPPoE interface
+```
 /interface/pppoe-client/monitor pppoe-out1
+```
 
 ## PPPoE throughput (bandwidth) & packets-per-second (PPS)
+```
 /interface/monitor-traffic pppoe-out1
+```
 
 ## Check CPU utilisation
+```
 /system/resource/monitor
+```
 
 ## Real-time traffic monitoring
 ```
 /tool/torch pppoe-out1
 /tool/torch pppoe-out1 ip-protocol=any port=any
 ```
+
 ## STP & Bridge
+```
 /interface/bridge monitor
+```
 
 ## Interface state
+```
 /interface/ethernet/monitor <number>
+```
 
 ## Blink interface
+```
 /interface/ethernet/blink <number>
+```
 
 ## PPPoE state
+```
 /interface/pppoe-client monitor <number>
+```
 
 ## IP connection tracking
+```
 /tool/torch interface=pppoe-out1 src-address=<IP/Bitmask>
+```
 
 ## DHCP leases
+```
 /ip/dhcp-server/lease/print
+```
 
 ## Show config
+```
 /export
+```
 
 ## Factory defaults
+```
 /system/reset-configuration
+```
 
 ## Import config (copy FILENAME to /files first)
+```
 /import file-name=FILENAME verbose=yes [dry-run]
+```
 
 ## Upgrade (copy routeros and any packages to /files first)
+```
 /reboot
+```
 
 ## Downgrade (copy routeros and any packages to /files first)
+```
 /system/package/downgrade
+```
 
 ## Command history
+```
 /system/history/print detail
+```
 
 ## Logs
+```
 /log/print
+```
 
 ## Console settings
 115200 8N1
 
 ## Sniffer (Quick)
+```
 /tool/sniffer/quick interface=ether1 ip-protocol=icmp
+```
 
 ## PCAP
 ```
@@ -214,7 +256,9 @@
 ```
 
 ## PPPoE
+```
 /interface/pppoe-client/print
+```
 
 ## BGP
 ```
@@ -224,20 +268,31 @@
 Do not stop BGP sessions!!!
 
 ## PoE
+```
 /interface/ethernet set etyher1 poe-out=off|on
+```
 
 ## Safe-mode
+```
 Ctrl+X
+```
 
 ## LTE Running state incl APN
+```
 /interface/lte/print detail
+```
 
 ## LTE status and connection detail
+```
 /interface/lte/monitor lte1
+```
 
 ## LTE Cell network monitor - towers and signals
+```
 /interface/lte/cell-monitor duration=10 lte1
-
+```
 
 ## LTE modem capabilities
+```
 /interface/lte/show-capabilities lte1
+```
