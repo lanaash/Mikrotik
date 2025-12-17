@@ -1,8 +1,8 @@
-DHCP server for remote relay e.g. layer 3 switch aggregating VLANs/IPs
+# DHCP server for remote relay e.g. layer 3 switch aggregating VLANs/IPs
 
-!
-! Remote Cisco BOOTP relay
-!
+## Remote Cisco BOOTP relay
+
+```
 !
 interface gigabitEthernet0/0
  description *** Link to Mikrotik ***
@@ -10,16 +10,22 @@ interface gigabitEthernet0/0
  no shut
 !
 interface gigabitEthernet0/1
- description *** DHCP clients ***
+ description *** DHCP clients #1***
  ip address 192.168.100.254 255.255.255.0
  ip helper-address 192.168.50.1
  no shut
 !
+interface gigabitEthernet0/2
+ description *** DHCP clients #2 ***
+ ip address 192.168.200.254 255.255.255.0
+ ip helper-address 192.168.50.1
+ no shut
+!
+```
 
-#
-# Mikrotik DHCP server
-#
-/ip/address add address=192.168.50.1/30 interface=ether1 network=192.168.50.0
+##  Mikrotik DHCP server
+```
+/ip/address add address=192.168.50.1/30 interface=ether1 network=192.168.50.0 comment="Link to Cisco"
 
 /ip/pool
 add name=pool1 ranges=192.168.100.1-192.168.100.2
@@ -35,3 +41,4 @@ add address-pool=pool2 authoritative=yes bootp-support=dynamic disabled=no inter
 
 /ip/route add dst-address=192.168.100.0/24 gateway=192.168.50.2
 /ip/route add dst-address=192.168.200.0/24 gateway=192.168.50.2
+```
