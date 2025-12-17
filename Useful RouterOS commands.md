@@ -1,19 +1,29 @@
 # Useful RouterOS commands
 
 # Router uptime, hardware, architecture & firmware
+```
 /system/resource print
+```
 
 # License
+```
 /system/license print
+```
 
 # Device mode & features
+```
 /system/device-mode/print
+```
 
 # Logged in users
+```
 /user/active/print
+```
 
 # Reboot
+```
 /system/reboot
+```
 
 # System health (CPU temp, SFP temp, fans, PSUs)
 /system/health print
@@ -28,16 +38,22 @@
 /system/package/update/check-for-updates
 /system/package/update/install
 ```
+
 # BIOS Upgrade (packaged with RouterOS)
 ```
 /system/routerboard/print
 /system/routerboard/upgrade
 ```
+
 # List Routing table
+```
 /ip/route/print
+```
 
 # List Interfaces & MTUs
+```
 /interface/print
+```
 
 ## SNMP
 ```
@@ -46,36 +62,50 @@
 ```
 
 ## IP config
+```
 /ip/address/print
+```
 
 ## List ARP table
+```
 /ip/arp/print
+```
 
 ## Find in ARP table
+```
 /ip/arp/print where address=x.x.x.x
+```
 
 ## MAC Table
+```
 /interface/bridge/host/print
+```
 
 ## Hostname
+```
 /system/identity/print
+```
 
 ## Interface stats
 ```
 /interface/ethernet/reset-counters
 /interface/ethernet/print stats
 ```
+
 ## Ethernet throughput (bandwidth) & packets-per-second (PPS)
 ```
 /interface/monitor-traffic sfp-sfpplus1
 ```
+
 ## Ethernet link speed and duplex
 ```
 /interface/ethernet/monitor ether1
 ```
 
 ## Running services and ACLs
+```
 /ip/service/print
+```
 
 ## Quick view of VOIP bandwidth traversing router
 ```
@@ -83,10 +113,15 @@
 /tool/torch interface=pppoe-out1 dscp=46  # RTP
 ```
 ## Telnet client
+```
 /system/telnet <IP> <TCP Port>
+```
 
 ## Ping
+```
 /ping <IP>
+```
+
 
 ## Firewall state table
 /ip/firewall/connection/print
