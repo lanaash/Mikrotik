@@ -66,7 +66,13 @@
 /interface/ethernet/print stats
 ```
 ## Ethernet throughput (bandwidth) & packets-per-second (PPS)
+```
 /interface/monitor-traffic sfp-sfpplus1
+```
+## Ethernet link speed and duplex
+```
+/interface/ethernet/monitor ether1
+```
 
 ## Running services and ACLs
 /ip/service/print
@@ -103,7 +109,7 @@
 ## Check CPU utilisation
 /system/resource/monitor
 
-## Reali-time traffic monitoring
+## Real-time traffic monitoring
 ```
 /tool/torch pppoe-out1
 /tool/torch pppoe-out1 ip-protocol=any port=any
