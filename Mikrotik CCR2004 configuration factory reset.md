@@ -11,4 +11,4 @@
   factory reset of the configuration
 
 Note that if after 18 seconds since power on the USER LED is now showing solid green again AND the reset button is now released the router will be 
-operating in CAPSMAN mode and will not be pingable on 192.168.88.1 - so try again!
+operating in CAPSMAN mode and will not be pingable on 192.168.88.1 as the interfaces are slaved - so try again!
