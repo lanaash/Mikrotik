@@ -4,6 +4,8 @@
 ## Useful RouterOS commands
 Collection of day to day CLI commands
 
+## Mikrotik CCR2004 configuration factory reset
+Careful you don't boot into CAPSMAN mode
 
 ## Linux guest on Mikrotik
 
