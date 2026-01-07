@@ -5,8 +5,8 @@
 Collection of day to day CLI commands
 
 
-Configuration factory reset
-Careful you don't boot into CAPSMAN mode
+## Configuration factory reset
+Which LED to watch and for how long
 
 
 ## Linux guest on Mikrotik
