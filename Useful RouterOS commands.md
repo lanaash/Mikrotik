@@ -242,14 +242,14 @@
 ```
 /tool/sniffer/print
 
-/tool/sniffer/set filter-ip-address=192.168.1.73/32
+/tool/sniffer/set filter-ip-address=192.168.x.x/32
 /tool/sniffer/set filter-direction=any
 /tool/sniffer/set filter-stream=yes
-
+/tool/sniffer/set only-headers=yes
 /tool/sniffer/set file-name=my.pcap
-
-/tool/sniffer/set memory-limit=50M
-/tool/sniffer/set file-limit=50M
+# Size is KiB so 50K = 50M on disk/mem
+/tool/sniffer/set memory-limit=50K
+/tool/sniffer/set file-limit=50K
 
 /tool/sniffer/start interface=ether1 
 /tool/sniffer/stop                  
