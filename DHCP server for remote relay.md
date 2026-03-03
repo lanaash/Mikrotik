@@ -36,8 +36,8 @@ add address=192.168.100.0/24 gateway=192.168.100.254
 add address=192.168.200.0/24 gateway=192.168.200.254
 
 /ip/dhcp-server
-add address-pool=pool1 authoritative=yes bootp-support=dynamic disabled=no interface=ether1 lease-time=1w name=server1 relay=192.168.100.254
-add address-pool=pool2 authoritative=yes bootp-support=dynamic disabled=no interface=ether1 lease-time=1w name=server2 relay=192.168.200.254
+add address-pool=pool1 authoritative=yes bootp-lease-time=lease-time bootp-support=dynamic conflict-detection=no disabled=no interface=ether1 lease-time=1w name=server1 relay=192.168.100.254
+add address-pool=pool2 authoritative=yes bootp-lease-time=lease-time bootp-support=dynamic conflict-detection=no disabled=no interface=ether1 lease-time=1w name=server2 relay=192.168.200.254
 
 /ip/route add dst-address=192.168.100.0/24 gateway=192.168.50.2
 /ip/route add dst-address=192.168.200.0/24 gateway=192.168.50.2
