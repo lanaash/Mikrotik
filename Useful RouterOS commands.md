@@ -1,5 +1,12 @@
 # Useful RouterOS commands
 
+# Remove all input firewall rules
+```
+:foreach id in=[/ip/firewall/filter/find where chain="input"] do={
+/ip/firewall/filter/remove $id;
+}
+```
+
 # Router uptime, hardware, architecture & firmware
 ```
 /system/resource print
