@@ -25,7 +25,6 @@ add interface=bridge1 name=VLAN20 vlan-id=20
 ## IP Addresses
 ```
 /ip address
-add address=192.168.88.1/24 comment=defconf interface=bridge network=192.168.88.0
 add address=192.168.10.254/24 interface=VLAN10 network=192.168.10.0
 add address=192.168.20.254/24 interface=VLAN20 network=192.168.20.0
 ```
