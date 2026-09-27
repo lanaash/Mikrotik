@@ -1,5 +1,7 @@
 # GRE tunnel to webfilter with policy routing
 
+Static NAT in the path e.g. intermediate firewall kills GRE keepalives!!
+
 ## Customer router
 
 ```
