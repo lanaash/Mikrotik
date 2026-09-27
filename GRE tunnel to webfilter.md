@@ -29,7 +29,7 @@ passthrough=no protocol=tcp src-address=192.168.0.0/24
 ## Webfilter edge router
 ```
 !
-! Cisco peer
+! Cisco tunnel peer
 !
 interface Tunnel0
  ip address 10.10.0.1 255.255.255.252
