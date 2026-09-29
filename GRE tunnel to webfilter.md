@@ -2,7 +2,6 @@
 
 Static NAT in the path e.g. intermediate firewall kills GRE keepalives!!
 
-## Customer router
 
 ```
 #
@@ -25,19 +24,5 @@ Static NAT in the path e.g. intermediate firewall kills GRE keepalives!!
 /ip/firewall/mangle add action=mark-routing chain=prerouting dst-port=80,443 new-routing-mark=webfilter \
 passthrough=no protocol=tcp src-address=192.168.0.0/24
 
-
 ```
 
-## Webfilter edge router
-```
-!
-! Cisco tunnel peer
-!
-interface Tunnel0
- ip address 10.10.0.1 255.255.255.252
- tunnel source GigabitEthernet0/0
- tunnel destination 10.0.0.254
-!
-ip route 192.168.0.0 255.255.255.0 10.10.0.2
-!
-```
