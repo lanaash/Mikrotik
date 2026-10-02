@@ -40,4 +40,7 @@ You could schedule this to loop every 30 seconds for example.
 ## API PoCs in python & bash
 Simple PoCs for exploring RouterOS config via the Rest API
 
+## GRE tunnel to webfilter
+Policy routing web traffic into Gre tunnel for filtering in the cloud
+
 
