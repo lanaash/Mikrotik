@@ -1,5 +1,10 @@
 # Useful RouterOS commands
 
+# Fetch a remote file
+```
+/tool/fetch url="http://x.x.x.x:8080/myfile" mode=http [keep-result=no]
+```
+
 # Remove all input firewall rules
 ```
 :foreach id in=[/ip/firewall/filter/find where chain="input"] do={
