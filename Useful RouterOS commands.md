@@ -308,3 +308,11 @@ Ctrl+X
 ```
 /interface/lte/show-capabilities lte1
 ```
+
+## Get variables from monitor commands
+```
+/interface/lte/monitor lte1 once do={
+  :set mobileImsi $"imsi"
+  :set mobileIccid $"uicc"
+}
+```
