@@ -279,7 +279,7 @@ Established peers
 ```
 Received routes
 ```
-/ip/route/print where bgp active
+/ip/route/print where bgp [active]
 ```
 Advertised routes
 ```
