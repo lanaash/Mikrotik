@@ -286,6 +286,11 @@ Advertised routes
 /routing/bgp/advertisements/print detail
 ```
 
+AS Path and Communities
+```
+/routing/route/print proplist=dst-address,gateway,bgp.as-path,bgp.communities
+```
+
 ## PoE
 ```
 /interface/ethernet set etyher1 poe-out=off|on
