@@ -273,11 +273,18 @@
 ```
 
 ## BGP
+Established peers
 ```
 /routing/bgp/session/print where established
+```
+Received routes
+```
 /ip/route/print where bgp active
 ```
-Do not stop BGP sessions!!!
+Advertised routes
+```
+/routing/bgp/advertisements/print detail
+```
 
 ## PoE
 ```
